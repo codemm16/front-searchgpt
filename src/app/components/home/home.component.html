@@ -1,0 +1,33 @@
+
+<div class="mainTitle">
+
+    <h1>Buscador GPT Searcher</h1>
+    <p >Busca lo que desees.....</p>
+</div>
+
+<div class="form">
+
+    <input type="text" 
+    [(ngModel)]="inputValue" 
+    class="custom-input" 
+    placeholder="Ingresa tu consulta aquí"
+    id="myInput"
+    >
+    <button id="myButton" class="custom-button" type="submit" (click)="askAnswer()">Buscar</button>
+</div>
+
+
+<div class="answer">
+    
+
+        <h3>{{answerBot}}</h3>
+</div>
+
+<div class="loading" *ngIf="status=='loading' && messagesDisplayer.error == ''">
+    <img src="https://cdn.dribbble.com/users/891352/screenshots/2692406/car-drift-loader.gif" alt="">
+</div>
+
+
+<div class="error" *ngIf="messagesDisplayer.error != ''">
+   <p>Error en la búsqueda, por favor comuníquese con el administrador</p>
+</div>

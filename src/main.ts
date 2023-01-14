@@ -1,7 +1,29 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { appRoutes } from './app/components/app.routes';
+import { environment } from './environments/environment';
+import { AppComponent } from './app/components/app.component';
+import { MessageAdapterService } from './app/adapters/message-adapter.service';
+import MessagesDisplayer from './app/domain/messages-displayer';
 
-import { AppModule } from './app/app.module';
 
+if (environment.production) {
+  enableProdMode();
+}
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+
+   providers: [
+    provideRouter(appRoutes),
+    importProvidersFrom(HttpClientModule),
+
+    //DOMAIN
+    {provide: 'IDisplayMessages', useClass: MessagesDisplayer},
+
+    //ADAPTERS
+    {provide: 'IManageMessages', useClass: MessageAdapterService}
+   
+  ],
+});
