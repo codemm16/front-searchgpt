@@ -7,7 +7,7 @@ import { environment } from './environments/environment';
 import { AppComponent } from './app/components/app.component';
 import { MessageAdapterService } from './app/adapters/message-adapter.service';
 import MessagesDisplayer from './app/domain/messages-displayer';
-
+//Comentario
 
 if (environment.production) {
   enableProdMode();
